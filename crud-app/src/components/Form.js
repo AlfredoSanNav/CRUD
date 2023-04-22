@@ -20,25 +20,30 @@ const Form = ({user, setUser}) =>{
         } else if(!(validEmail.test(email) ) ){
             alert('Ingresa un correo valido.')
             return 
+        } else {
+            //Consulta
+            const requestInit = {
+                method: 'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(user)
+            }
+            fetch('http://localhost:3000/api/users', requestInit)
+            .then(res => res.text())
+            .then(res => console.log(res))
+
+            //Reinicia el estado del libro
+         setUser({
+                        name:'',
+                        firstLastName:'',
+                        secondLastName:'',
+                        email:''
+                    })
+
         }
 
-        //Consulta
-        const requestInit = {
-            method: 'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(user)
-        }
-        fetch('http://localhost:3000/api/users', requestInit)
-        .then(res => res.text())
-        .then(res => console.log(res))
+        
 
-        //Reinicia el estado del libro
-        setUser({
-            name:'',
-            firstLastName:'',
-            secondLastName:'',
-            email:''
-        })
+        
     }
 
     return(

@@ -25,16 +25,18 @@ const UsersList = ({user, users, setUser, setListUpdated}) =>{
         } else if(!(validEmail.test(email) ) ){
             alert('Ingresa un correo valido.')
             return 
-        } 
-        const requestInit = {
-            method: 'PUT',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(user)
-        }
-        fetch('http://localhost:3000/api/users/' + id, requestInit)
-        .then(res => res.text())
-        .then(res => console.log(res))
+        } else {
+             const requestInit = {
+                method: 'PUT',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(user)
+            }
+            fetch('http://localhost:3000/api/users/' + id, requestInit)
+            .then(res => res.text())
+            .then(res => console.log(res))
 
+        }
+        
         //Reinicia el estado del libro
         setUser({
             name:'',
